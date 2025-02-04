@@ -4,6 +4,8 @@ import com.mrizkyff.java_23.dto.UserRequestDto;
 import com.mrizkyff.java_23.dto.UserResponseDto;
 import com.mrizkyff.java_23.model.User;
 import com.mrizkyff.java_23.service.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,5 +27,27 @@ public class UserController {
                 .email(newUser.getEmail())
                 .username(newUser.getUsername())
                 .build();
+    }
+
+    @GetMapping("/{id}")
+    public UserResponseDto getUserById(@PathVariable String id) {
+        User user = userService.getUserById(id);
+        return new UserResponseDto().builder()
+                .id(String.valueOf(user.getId()))
+                .fullName(user.getFullName())
+                .email(user.getEmail())
+                .username(user.getUsername())
+                .build();
+    }
+
+    @GetMapping("")
+    public Page<UserResponseDto> getUsers(Pageable pageable) {
+        Page<User> users = userService.getAllUsers(pageable);
+        return users.map(user -> new UserResponseDto().builder()
+                .id(String.valueOf(user.getId()))
+                .fullName(user.getFullName())
+                .email(user.getEmail())
+                .username(user.getUsername())
+                .build());
     }
 }

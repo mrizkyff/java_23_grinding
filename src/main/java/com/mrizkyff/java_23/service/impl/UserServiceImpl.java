@@ -3,7 +3,11 @@ package com.mrizkyff.java_23.service.impl;
 import com.mrizkyff.java_23.model.User;
 import com.mrizkyff.java_23.repository.UserRepository;
 import com.mrizkyff.java_23.service.UserService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,5 +28,15 @@ public class UserServiceImpl implements UserService {
         newUser.setUsername(username);
 
         return userRepository.save(newUser);
+    }
+
+    @Override
+    public User getUserById(String id) {
+        return userRepository.findById(UUID.fromString(id)).orElse(null);
+    }
+
+    @Override
+    public Page<User> getAllUsers(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 }
