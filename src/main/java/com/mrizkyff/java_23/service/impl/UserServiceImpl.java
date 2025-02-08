@@ -5,6 +5,7 @@ import com.mrizkyff.java_23.repository.UserRepository;
 import com.mrizkyff.java_23.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -24,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
         newUser.setFullName(name);
         newUser.setEmail(email);
-        newUser.setPassword(password);
+        newUser.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
         newUser.setUsername(username);
 
         return userRepository.save(newUser);
