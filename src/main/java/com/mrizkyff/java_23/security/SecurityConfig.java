@@ -1,5 +1,6 @@
 package com.mrizkyff.java_23.security;
 
+import com.mrizkyff.java_23.config.AuthEntryPointJwt;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,7 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
+    private final AuthEntryPointJwt unauthorizedHandler;
 
     private static final String[] WHITE_LIST_URL = {
             "/api/v1/auth/**",
@@ -28,11 +30,12 @@ public class SecurityConfig {
         http
                 .csrf()
                 .disable()
+                .exceptionHandling()
+                .authenticationEntryPoint(unauthorizedHandler)
+                .and()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(WHITE_LIST_URL)
-                        .permitAll()
-                        .anyRequest()
-                        .authenticated()
+                        .requestMatchers(WHITE_LIST_URL).permitAll()
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

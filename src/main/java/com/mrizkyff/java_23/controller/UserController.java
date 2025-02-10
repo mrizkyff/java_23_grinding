@@ -1,7 +1,7 @@
 package com.mrizkyff.java_23.controller;
 
-import com.mrizkyff.java_23.dto.UserRequestDto;
-import com.mrizkyff.java_23.dto.UserResponseDto;
+import com.mrizkyff.java_23.dto.request.user.UserRequestDto;
+import com.mrizkyff.java_23.dto.response.user.UserResponseDto;
 import com.mrizkyff.java_23.model.User;
 import com.mrizkyff.java_23.service.UserService;
 import org.springframework.data.domain.Page;

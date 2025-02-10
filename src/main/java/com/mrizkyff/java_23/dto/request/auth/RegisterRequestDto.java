@@ -1,5 +1,5 @@
 // RegisterRequest.java
-package com.mrizkyff.java_23.dto;
+package com.mrizkyff.java_23.dto.request.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

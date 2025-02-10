@@ -1,4 +1,4 @@
-package com.mrizkyff.java_23.dto;
+package com.mrizkyff.java_23.dto.response.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

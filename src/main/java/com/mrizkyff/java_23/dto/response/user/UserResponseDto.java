@@ -1,4 +1,4 @@
-package com.mrizkyff.java_23.dto;
+package com.mrizkyff.java_23.dto.response.user;
 
 import lombok.*;
 
@@ -7,9 +7,9 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserRequestDto {
+public class UserResponseDto {
+    private String id;
     private String username;
     private String email;
-    private String password;
     private String fullName;
 }

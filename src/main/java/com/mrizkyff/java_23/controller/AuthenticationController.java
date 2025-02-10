@@ -1,8 +1,8 @@
 package com.mrizkyff.java_23.controller;
 
-import com.mrizkyff.java_23.dto.AuthenticationResponseDto;
-import com.mrizkyff.java_23.dto.LoginRequestDto;
-import com.mrizkyff.java_23.dto.RegisterRequestDto;
+import com.mrizkyff.java_23.dto.response.auth.AuthenticationResponseDto;
+import com.mrizkyff.java_23.dto.request.auth.LoginRequestDto;
+import com.mrizkyff.java_23.dto.request.auth.RegisterRequestDto;
 import com.mrizkyff.java_23.model.User;
 import com.mrizkyff.java_23.repository.UserRepository;
 import com.mrizkyff.java_23.service.JwtService;
