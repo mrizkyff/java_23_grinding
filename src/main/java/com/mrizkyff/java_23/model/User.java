@@ -1,11 +1,14 @@
 package com.mrizkyff.java_23.model;
 
+import com.mrizkyff.java_23.model.baseModel.Auditable;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -16,7 +19,14 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements UserDetails {
+@EntityListeners({AuditingEntityListener.class})
+@AttributeOverrides({
+        @AttributeOverride(name = "createdDate", column = @Column(name = "created_date", columnDefinition = "TIMESTAMP WITH TIME ZONE", nullable = false)),
+        @AttributeOverride(name = "lastModifiedDate", column = @Column(name = "last_modified_date", columnDefinition = "TIMESTAMP WITH TIME ZONE", nullable = false)),
+        @AttributeOverride(name = "createdBy", column = @Column(name = "created_by", nullable = false)),
+        @AttributeOverride(name = "lastModifiedBy", column = @Column(name = "last_modified_by", nullable = false))
+})
+public class User extends Auditable implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(nullable = false)
