@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -67,5 +68,19 @@ public class User extends Auditable implements UserDetails, Serializable {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        this.setCreatedBy(UUID.fromString("00000000-0000-0000-0000-000000000000"));
+        this.setLastModifiedBy(UUID.fromString("00000000-0000-0000-0000-000000000000"));
+        this.setCreatedDate(Instant.now());
+        this.setLastModifiedDate(Instant.now());
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.setLastModifiedBy(UUID.fromString("00000000-0000-0000-0000-000000000000"));
+        this.setLastModifiedDate(Instant.now());
     }
 }

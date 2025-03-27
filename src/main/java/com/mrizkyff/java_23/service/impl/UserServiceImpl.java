@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
         newUser.setEmail(email);
         newUser.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
         newUser.setUsername(username);
+        newUser.setCreatedBy(UUID.randomUUID());
 
         return userRepository.save(newUser);
     }
